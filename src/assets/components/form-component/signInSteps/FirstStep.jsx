@@ -29,16 +29,17 @@ export default function FirstStep() {
         _password: iPass,
         _email: iEmail
     }
-    async function proceed(e) {
+    async function proceed() {
         const erro = checkInput()
         if (erro) return (alert('Algum campo não foi preenchido.\n\nPor favor, confira as informações e tente novamente!'), window.location.reload())
         if (iPass !== iConfirmPass || iEmail !== iConfirmEmail) return (alert('Houve um erro de confirmação das informações\n\nOs campos serão reiniciados para que você possa tentar novamente.'), window.location.reload())
 
         const url = 'http://localhost:3000'
         const services = new Services(url)
-        const data = await services.indexAll().then(res => res[0])
+        let data = await services.indexAll().then(res => res[0])
         data.userData = { ...newUserData }
-        return services.update(data, data.id)
+
+        return await services.update(data, data.id)
     }
 
     async function cancel() {
@@ -103,7 +104,7 @@ export default function FirstStep() {
 
                 <section className='actionArea'>
                     <Link to='/' className='disabledButton' onClick={cancel} >Cancelar</Link>
-                    <Link to='/second' className='pButton' onClick={proceed}>Próximo</Link>
+                    <Link to='/second' className='pButton' onClick={() => proceed}>Próximo</Link>
                 </section>
             </form >
         </section >

@@ -2,9 +2,9 @@
   "api": [
     {
       "userData": {
-        "_name": "Vasco",
-        "_password": "123",
-        "_email": "321"
+        "_name": "Victor Labussiere",
+        "_password": "victor",
+        "_email": "victor@123.com"
       },
       "userAdress": {
         "_cep": "26225480",

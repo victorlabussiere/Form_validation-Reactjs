@@ -24,16 +24,9 @@ export default function SecondStep() {
         bairroValue.value = data.bairro
         cidadeValue.value = data.localidade
         ruaValue.value = data.logradouro
+        let setNum = document.getElementById('numValue');
 
-        let setAdress = {
-            _cep: cepValue.value,
-            _rua: ruaValue.value,
-            _numero: numValue.value,
-            _bairro: bairroValue.value,
-            _cidade: cidadeValue.value,
-            _reference: referenciaValue.value
-        }
-        return setAdress
+        return setNum.onfocus()
     }
 
     function checkInputs() {
@@ -47,17 +40,21 @@ export default function SecondStep() {
     }
 
     async function proceedSecond(e) {
+        let setAdress = {
+            _cep: cepValue.value,
+            _rua: ruaValue.value,
+            _numero: numValue.value,
+            _bairro: bairroValue.value,
+            _cidade: cidadeValue.value,
+            _reference: referenciaValue.value
+        }
         const error = checkInputs()
         if (error) return (alert('Algum campo ficou faltando'), window.location.reload())
-
-        let valuesSet = await setValues()
-
-        console.log(valuesSet)
 
         const url = 'http://localhost:3000'
         const services = new Services(url)
         const data = await services.indexAll().then(res => res[0])
-        data.userAdress = { ...valuesSet }
+        data.userAdress = { ...setAdress }
 
         return services.update(data, data.id)
     }
