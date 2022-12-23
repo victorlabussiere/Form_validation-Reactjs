@@ -1,0 +1,23 @@
+{
+  "api": [
+    {
+      "userData": {
+        "_name": "Vasco",
+        "_password": "123",
+        "_email": "321"
+      },
+      "userAdress": {
+        "_cep": "26225480",
+        "_rua": "Rua Afonso Pena",
+        "_numero": "105",
+        "_bairro": "Vila Nova",
+        "_cidade": "Nova Iguaçu",
+        "_reference": ""
+      },
+      "about": {
+        "_text": null
+      },
+      "id": 1
+    }
+  ]
+}
