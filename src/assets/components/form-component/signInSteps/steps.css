@@ -1,0 +1,103 @@
+* {
+    transition: .2s all ease-in-out;
+}
+
+nav ul li {
+    color: #a3a3a3;
+}
+
+nav ul li .link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.activeLink {
+    font-weight: bold;
+    color: #5357B1
+}
+
+nav ul li a:hover {
+    transform: scale(1.02);
+}
+
+.childContainer {
+    width: 100%;
+    height: fit-content;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    gap: 2.4rem;
+}
+
+fieldset {
+    display: flex;
+    justify-content: start;
+    align-items: stretch;
+    width: 100%;
+    gap: 2rem;
+}
+
+fieldset label {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    width: 100%;
+}
+
+input {
+    padding: .4rem 1rem;
+    border-radius: .4rem;
+    border: 1px solid #a3a3a3;
+}
+
+input:focus-visible,
+input:focus-within {
+    border: solid 2px #5357B1;
+    outline: none;
+}
+
+input:hover {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .05);
+    outline: none;
+}
+
+button {
+    align-self: flex-end;
+}
+
+.formAdress {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 100%;
+}
+
+.twoColumns {
+    display: flex;
+    width: 100%;
+    gap: 3.2rem;
+}
+
+.column1,
+.column2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem
+}
+
+.column3,
+.column3 label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
