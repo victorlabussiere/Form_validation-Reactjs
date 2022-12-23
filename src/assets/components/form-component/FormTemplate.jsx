@@ -39,7 +39,7 @@ export default function FormTemplate() {
         return await services.resetJsonServer()
             .then(async () => setTimeout(async () => {
                 await createRequest()
-            }, 1000))
+            }, 100))
             .catch(err => console.error('Erro ao iniciar o cadastro', err))
 
     }

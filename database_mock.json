@@ -2,17 +2,17 @@
   "api": [
     {
       "userData": {
-        "_name": "Victor Labussiere",
-        "_password": "victor",
-        "_email": "victor@123.com"
+        "_name": null,
+        "_password": null,
+        "_email": null
       },
       "userAdress": {
-        "_cep": "26225480",
-        "_rua": "Rua Afonso Pena",
-        "_numero": "105",
-        "_bairro": "Vila Nova",
-        "_cidade": "Nova Iguaçu",
-        "_reference": ""
+        "_cep": null,
+        "_rua": null,
+        "_numero": null,
+        "_bairro": null,
+        "_cidade": null,
+        "_reference": null
       },
       "about": {
         "_text": null

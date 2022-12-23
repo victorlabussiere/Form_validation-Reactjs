@@ -57,21 +57,26 @@ class Services {
     }
 
     async resetJsonServer() {
+
         const list = await fetch(this.baseUrl + '/api', {
             method: "GET",
             headers: { 'Content-type': 'application/json' }
-        }).then(res => res.json())
-        if (list.length <= 0) return
-        list.map(async item => {
+        })
+            .then(res => res.json())
+
+        if (list.length <= 0) return false; // break point for false
+
+        const cleanServer = list.map(async item => {
             const id = item.id
-            await fetch(`${this.baseUrl}/api/${id}`, {
+            return await fetch(`${this.baseUrl}/api/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-type': 'application/json' }
-            })
+            }).catch(err => console.error('Reset json error', err))
         })
+
+        if (!cleanServer) throw Error
+        return await cleanServer;
     }
 }
-
-
 
 export default Services; 

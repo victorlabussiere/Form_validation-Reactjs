@@ -26,7 +26,7 @@ export default function SecondStep() {
         ruaValue.value = data.logradouro
         let setNum = document.getElementById('numValue');
 
-        return setNum.onfocus()
+        return setNum.onfocus
     }
 
     function checkInputs() {

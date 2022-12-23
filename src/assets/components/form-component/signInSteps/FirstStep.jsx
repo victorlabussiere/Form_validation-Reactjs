@@ -24,18 +24,19 @@ export default function FirstStep() {
         return count === 0 ? false : true
     }
 
-    let newUserData = {
-        _name: iName,
-        _password: iPass,
-        _email: iEmail
-    }
     async function proceed() {
+        let newUserData = {
+            _name: iName,
+            _password: iPass,
+            _email: iEmail
+        }
         const erro = checkInput()
+        const services = new Services(url)
+        const url = 'http://localhost:3000'
+
         if (erro) return (alert('Algum campo não foi preenchido.\n\nPor favor, confira as informações e tente novamente!'), window.location.reload())
         if (iPass !== iConfirmPass || iEmail !== iConfirmEmail) return (alert('Houve um erro de confirmação das informações\n\nOs campos serão reiniciados para que você possa tentar novamente.'), window.location.reload())
 
-        const url = 'http://localhost:3000'
-        const services = new Services(url)
         let data = await services.indexAll().then(res => res[0])
         data.userData = { ...newUserData }
 
@@ -43,8 +44,12 @@ export default function FirstStep() {
     }
 
     async function cancel() {
-        const reset = await services.resetJsonServer()
-        return await reset;
+
+        const url = 'http://localhost:3000'
+        const services = new Services(url)
+
+        return await services.resetJsonServer()
+            .catch(err => console.error('Erro ao iniciar o cadastro', err))
     }
 
     return (
@@ -104,7 +109,7 @@ export default function FirstStep() {
 
                 <section className='actionArea'>
                     <Link to='/' className='disabledButton' onClick={cancel} >Cancelar</Link>
-                    <Link to='/second' className='pButton' onClick={() => proceed}>Próximo</Link>
+                    <Link to='/second' className='pButton' onClick={proceed}>Próximo</Link>
                 </section>
             </form >
         </section >
