@@ -1,3 +1,4 @@
+
 import './steps.css'
 import { useState } from 'react'
 import Services from '../../../../Services'
@@ -12,27 +13,27 @@ export default function FirstStep() {
     let [iConfirmPass, setConfirmPass] = useState()
     let [iConfirmEmail, setConfirmEmail] = useState()
 
-
-
     function checkInput() {
-        let count = 0
+        let erro = 0
         const inputs = document.getElementsByTagName('input')
         Object.entries(inputs).map(ar => ar.reduce((key, item) => {
-            return item.value.length === 0 ? count++ : count
+            return item.value.length === 0 ? erro++ : erro
         }))
 
-        return count === 0 ? false : true
+        return erro === 0 ? false : true
     }
 
     async function proceed() {
+
+        const erro = checkInput()
+        const url = 'http://localhost:3000'
+        const services = new Services(url)
+
         let newUserData = {
             _name: iName,
             _password: iPass,
             _email: iEmail
         }
-        const erro = checkInput()
-        const services = new Services(url)
-        const url = 'http://localhost:3000'
 
         if (erro) return (alert('Algum campo não foi preenchido.\n\nPor favor, confira as informações e tente novamente!'), window.location.reload())
         if (iPass !== iConfirmPass || iEmail !== iConfirmEmail) return (alert('Houve um erro de confirmação das informações\n\nOs campos serão reiniciados para que você possa tentar novamente.'), window.location.reload())
@@ -49,7 +50,7 @@ export default function FirstStep() {
         const services = new Services(url)
 
         return await services.resetJsonServer()
-            .catch(err => console.error('Erro ao iniciar o cadastro', err))
+            .catch(err => console.error('Erro ao reiniciar o servidor', err))
     }
 
     return (

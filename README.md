@@ -1,19 +1,13 @@
-# form_REACT
-use 
+# Form docs
+## Installing dependencies
+Install dependencies 
 ```
 npm i
+npm install json-server --save-dev
 ```
-to intall all dependencies 
-
-then use 
-```
-npm start 
-```
-to start json server 
-
-and to start reat application, use:
+## Start App and Server:
 ```
 npm run dev
+------------
+npm start 
 ```
-
-The objective of this project is simulate a form request to sign up some user.
