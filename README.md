@@ -1,13 +1,6 @@
-# Form docs
-## Installing dependencies
-Install dependencies 
-```
-npm i
-npm install json-server --save-dev
-```
-## Start App and Server:
-```
-npm run dev
-------------
-npm start 
-```
+# Form Step by Step with React
+## Install dependencies with:  
+``` npm i ```
+
+## Run the application with:
+``` npm run dev ```
