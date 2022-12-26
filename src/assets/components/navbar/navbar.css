@@ -1,0 +1,47 @@
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 100%;
+  gap: 2rem;
+  padding: 1rem 0;
+
+  /* font style */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  cursor: default;
+}
+
+ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  color: #a3a3a3;
+}
+
+.material-icons.checked {
+  color: #00ae63;
+}
+
+.link.checked {
+  color: #00ae63;
+}
+nav ul li .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.link.active {
+  color: #5357b1;
+}
+
+nav ul li a:hover {
+  transform: scale(1.02);
+}

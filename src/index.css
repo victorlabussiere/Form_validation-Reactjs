@@ -120,7 +120,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -138,51 +138,50 @@ a,
 li,
 ul,
 label {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-decoration: none;
 }
 
 /* MATERIAL ICONS PRE-SET */
 .material-icons {
-  padding: .5rem;
+  padding: 0.5rem;
   width: fit-content;
   height: fit-content;
-  background-color: #F0F2F6;
+  background-color: #f0f2f6;
   border-radius: 100%;
-  color: #8C98A9;
+  color: #8c98a9;
 }
 
 .material-icons.active {
-  color: #5357B1
+  color: #5357b1;
 }
 
 .material-icons.check {
-  color: #00AE63;
+  color: #00ae63;
 }
 
 /* Buttons Styles */
 
 .pButton {
-  background-color: #5357B1;
+  background-color: #5357b1;
   outline: none;
   border: none;
-  padding: .8rem 3.2rem;
-  border-radius: .4rem;
+  padding: 0.8rem 3.2rem;
+  border-radius: 0.4rem;
 
   color: #fff;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-
 }
 
 .disabledButton {
-  background-color: #8C98A9;
+  background-color: #8c98a9;
   outline: none;
   border: none;
-  padding: .8rem 3.2rem;
-  border-radius: .4rem;
+  padding: 0.8rem 3.2rem;
+  border-radius: 0.4rem;
 
   color: #fff;
   font-style: normal;
@@ -190,21 +189,10 @@ label {
   font-size: 16px;
   line-height: 24px;
 
-  transition: .2s all ease-in-out;
+  transition: 0.2s all ease-in-out;
 }
 
 .pButton:hover,
 .disabledButton:hover {
   transform: scale(1.04);
-}
-
-/* link states */
-
-.checkLink {
-  color: #00AE63;
-}
-
-.link.checkLink,
-.link {
-  cursor: default;
 }

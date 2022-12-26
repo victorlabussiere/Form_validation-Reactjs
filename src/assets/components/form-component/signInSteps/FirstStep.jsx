@@ -1,118 +1,122 @@
-
-import './steps.css'
-import { useState } from 'react'
-import Services from '../../../../Services'
-import { Link } from 'react-router-dom'
-
+import "./steps.css";
+import React from "react";
+import { useState } from "react";
+import Navbar from "../../navbar/Navabar";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function FirstStep() {
+  let [_name, setName] = useState();
+  let [_pass, setPassword] = useState();
+  let [_email, setEmail] = useState();
+  let [_confirmPass, setConfirmPass] = useState();
+  let [_nasc, setNasc] = useState();
 
-    let [iName, setName] = useState()
-    let [iPass, setPassword] = useState()
-    let [iEmail, setEmail] = useState()
-    let [iConfirmPass, setConfirmPass] = useState()
-    let [iConfirmEmail, setConfirmEmail] = useState()
+  function checkInput() {
+    let count = 0;
+    const inputs = document.getElementsByTagName("input");
+    for (let i of inputs) {
+      i.value.length === 0 ? count++ : count;
+    }
+    return count === 0 ? true : false;
+  }
 
-    function checkInput() {
-        let erro = 0
-        const inputs = document.getElementsByTagName('input')
-        Object.entries(inputs).map(ar => ar.reduce((key, item) => {
-            return item.value.length === 0 ? erro++ : erro
-        }))
+  useEffect(() => checkInput, []);
 
-        return erro === 0 ? false : true
+  async function updateData() {
+    if (!checkInput())
+      return alert("Algum campo não foi preenchido corretamente");
+
+    if (_pass !== _confirmPass) {
+      return alert(
+        "Houve um erro ao reconhecer sua senha\nPor favor, confira se a senha foi inserida corretamente"
+      );
     }
 
-    async function proceed() {
+    let userData = {
+      _name,
+      _pass,
+      _email,
+      _nasc,
+    };
 
-        const erro = checkInput()
-        const url = 'http://localhost:3000'
-        const services = new Services(url)
+    console.log(userData);
+    const data = JSON.stringify(userData);
+    localStorage.setItem("User", data);
+    return (window.location.href = "/second");
+  }
 
-        let newUserData = {
-            _name: iName,
-            _password: iPass,
-            _email: iEmail
-        }
+  return (
+    <section className="childContainer">
+      <Navbar state="first"> </Navbar>
+      <form>
+        <fieldset className="nameField">
+          <label htmlFor="NameInput">
+            Nome
+            <input
+              type="text"
+              name="NameInput"
+              id="nameValue"
+              onChange={() => setName((prev) => (prev = nameValue.value))}
+            />
+          </label>
+        </fieldset>
 
-        if (erro) return (alert('Algum campo não foi preenchido.\n\nPor favor, confira as informações e tente novamente!'), window.location.reload())
-        if (iPass !== iConfirmPass || iEmail !== iConfirmEmail) return (alert('Houve um erro de confirmação das informações\n\nOs campos serão reiniciados para que você possa tentar novamente.'), window.location.reload())
+        <fieldset className="passField">
+          <label htmlFor="PassInput">
+            Senha
+            <input
+              type="password"
+              name="PassInput"
+              id="passValue"
+              onChange={() => setPassword((prev) => (prev = passValue.value))}
+            />
+          </label>
 
-        let data = await services.indexAll().then(res => res[0])
-        data.userData = { ...newUserData }
+          <label htmlFor="ConfirmPass">
+            Confirmar Senha
+            <input
+              type="password"
+              name="ConfirmPass"
+              id="confirmPass"
+              onChange={() =>
+                setConfirmPass((prev) => (prev = confirmPass.value))
+              }
+            />
+          </label>
+        </fieldset>
 
-        return await services.update(data, data.id)
-    }
+        <fieldset className="emailField">
+          <label htmlFor="EmailInput">
+            E-mail
+            <input
+              type="text"
+              name="EmailInput"
+              id="emailValue"
+              onChange={() => setEmail((prev) => (prev = emailValue.value))}
+            />
+          </label>
 
-    async function cancel() {
-
-        const url = 'http://localhost:3000'
-        const services = new Services(url)
-
-        return await services.resetJsonServer()
-            .catch(err => console.error('Erro ao reiniciar o servidor', err))
-    }
-
-    return (
-        <section className='childContainer'>
-            <nav>
-                <ul>
-                    <li>
-                        <Link
-                            className='activeLink link'
-                            to="/first">
-                            <i className="material-icons active">info</i>
-                            Identificação do Usuário
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/second" className='link'>
-                            <i className="material-icons">home</i>
-                            Endereço do Usuário
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/third" className='link'>
-                            <i className="material-icons">description</i>
-                            Sobre Você
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-
-            <form>
-
-                <fieldset className="nameField">
-                    <label htmlFor="NameInput">Nome
-                        <input type="text" name="NameInput" id='nameValue' onChange={() => setName(prev => prev = nameValue.value)} />
-                    </label>
-                </fieldset>
-
-                <fieldset className="passField">
-                    <label htmlFor="PassInput">Senha
-                        <input type="password" name="PassInput" id='passValue' onChange={() => setPassword(prev => prev = passValue.value)} />
-                    </label>
-
-                    <label htmlFor="ConfirmPass">Confirmar Senha
-                        <input type="password" name="ConfirmPass" id='confirmPass' onChange={() => setConfirmPass(prev => prev = confirmPass.value)} />
-                    </label>
-                </fieldset>
-
-                <fieldset className="emailField">
-                    <label htmlFor="EmailInput">E-mail
-                        <input type="text" name="EmailInput" id='emailValue' onChange={() => setEmail(prev => prev = emailValue.value)} />
-                    </label>
-
-                    <label htmlFor="ConfirmEmail">Confirmar E-mail
-                        <input type="email" name="ConfirmEmail" id='confirmEmail' onChange={() => setConfirmEmail(prev => prev = confirmEmail.value)} />
-                    </label>
-                </fieldset>
-
-                <section className='actionArea'>
-                    <Link to='/' className='disabledButton' onClick={cancel} >Cancelar</Link>
-                    <Link to='/second' className='pButton' onClick={proceed}>Próximo</Link>
-                </section>
-            </form >
-        </section >
-    )
+          <label htmlFor="confirmNasc">
+            Confirmar E-mail
+            <input
+              type="date"
+              name="nasc"
+              id="nasc"
+              onChange={() => setNasc((prev) => (prev = nasc.value))}
+            />
+          </label>
+        </fieldset>
+        <span></span>
+        <section className="actionArea">
+          <Link to="/" className="disabledButton">
+            Cancelar
+          </Link>
+          <Link className="pButton" onClick={updateData}>
+            Avançar
+          </Link>
+        </section>
+      </form>
+    </section>
+  );
 }
