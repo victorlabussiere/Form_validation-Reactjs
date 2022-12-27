@@ -106,8 +106,8 @@ span {
 }
 
 .credits {
-  height: 100%;
   display: flex;
+  line-height: 1.6rem;
   flex-direction: column;
   justify-content: space-between;
 }

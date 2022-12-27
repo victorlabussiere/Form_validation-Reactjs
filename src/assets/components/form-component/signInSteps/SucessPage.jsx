@@ -10,6 +10,16 @@ export default function () {
   let num = UserAdress._numero;
   let cep = UserAdress._cep;
 
+  const data = {
+    UserData,
+    UserAdress,
+    UserAbout
+  }
+
+  function preview() {
+    console.log('User data', data)
+  }
+
   function newUser() {
     localStorage.clear();
     return (window.location.href = "/first");
@@ -80,19 +90,21 @@ export default function () {
       <span></span>
       <div className="footerType">
         <div className="credits">
-          <h2>Obrigado por utilizar o meu sistema.</h2>
-          <p>
-            Feito por{" "}
-            <a
+          <p>Clique em detalhes e abra o console para consultar os dados cadastrados.</p>
+
+           <p> Feito por <a
               className="link active"
               style={{ fontWeight: "bold" }}
               href="https://github.com/victorlabussiere"
             >
               Victor Labussiere.
-            </a>
-          </p>
+            </a></p>
+          
         </div>
         <div className="actionArea succesAreButton">
+          <Link className="pButton" onClick={preview}>
+            Detalhes
+          </Link>
           <Link className="pButton" onClick={newUser}>
             Novo Usuário
           </Link>
