@@ -25,6 +25,8 @@ export default function CheckForm() {
     };
 
     console.log(data);
+    localStorage.setItem("done", "true");
+    return (window.location.href = "/done");
   }
 
   return (

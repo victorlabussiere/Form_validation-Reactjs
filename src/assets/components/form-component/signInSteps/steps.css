@@ -80,6 +80,46 @@ span {
 
 .checkAdreassArea {
   display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.dataArea input,
+.checkAdreassArea input {
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #5357b1;
+}
+
+.checkAdreassArea {
+  display: flex;
   flex-direction: row;
   flex: 2 40%;
+}
+
+.footerType {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.credits {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.succesAreButton {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+input.sucess {
+  color: #00ae63;
 }

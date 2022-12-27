@@ -1,44 +1,34 @@
-import { BrowserRouter, Routes, Route, Link as a } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./formTemplate.css";
 
 import FirstStep from "./signInSteps/FirstStep";
 import SecondStep from "./signInSteps/SecondStep";
 import ThirdStep from "./signInSteps/ThirdStep";
 import CheckForm from "./signInSteps/CheckForm";
+import SucessPage from "./signInSteps/SucessPage";
 
 export default function FormTemplate() {
-  async function createRequest() {
-    const newRequest = {
-      userData: {
-        _name: null,
-        _password: null,
-        _email: null,
-      },
-      userAdress: {
-        _cep: null,
-        _rua: null,
-        _numero: null,
-        _bairro: null,
-        _cidade: null,
-        _reference: null,
-      },
-      about: {
-        _text: null,
-      },
-    };
-    const data = services.store(newRequest);
-    return await data;
-  }
+  let done = "";
+  done = localStorage.done;
+
   return (
     <div className="formContainer">
-      <h1>Criação de Usuário</h1>
+      {done === "" || !done ? (
+        <h1>Cadastrar Usuário</h1>
+      ) : (
+        <h1>Usuário Cadastrado!</h1>
+      )}
       <section className="start">
         <BrowserRouter>
           <Routes>
             <Route
               path="/"
               element={
-                <a href="/first" className="pButton">
+                <a
+                  href="/first"
+                  className="pButton"
+                  onClick={() => localStorage.setItem("done", "")}
+                >
                   Iniciar Cadastro
                 </a>
               }
@@ -47,6 +37,7 @@ export default function FormTemplate() {
             <Route path="/second" element={<SecondStep />} />
             <Route path="/third" element={<ThirdStep />} />
             <Route path="/checkForm" element={<CheckForm />} />
+            <Route path="/done" element={<SucessPage />} />
           </Routes>
         </BrowserRouter>
       </section>
