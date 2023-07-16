@@ -1,6 +1,6 @@
-# Form Step by Step with React
+# React form in wizard pattern with SPA architecture
 ## Install dependencies with:  
 ``` npm i ```
 
-## Run the application with:
+## Development enviroment:
 ``` npm run dev ```

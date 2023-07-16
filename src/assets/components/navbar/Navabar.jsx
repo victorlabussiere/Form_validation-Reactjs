@@ -1,39 +1,34 @@
 import "./navbar.css";
+import { useContext } from "react";
+import { FormContext } from "../../../context";
 
-export default function Navbar(state) {
-  let firstLink;
-  let secondLink;
-  let thirdLink;
+// import helpers functions
+import { iconClasses, liClasses } from './helpers/navbar'
 
-  if (state.state === "first")
-    (firstLink = "active"), (secondLink = ""), (thirdLink = "");
-  if (state.state === "second")
-    (firstLink = "checked"), (secondLink = "active"), (thirdLink = "");
-  if (state.state === "third")
-    (firstLink = "checked"), (secondLink = "checked"), (thirdLink = "active");
-  if (state.state === "allDone")
-    (firstLink = "checked"), (secondLink = "checked"), (thirdLink = "checked");
+export default function Navbar() {
+
+  const { step, setStep } = useContext(FormContext)
 
   return (
     <nav>
       <ul>
-        <li>
-          <a className={`link ${firstLink}`}>
-            <i className={`material-icons ${firstLink}`}>info</i>
-            Identificação do Usuário
-          </a>
+        <li
+          className={step >= 3 ? 'link checked' : liClasses(step, 0)}
+          onClick={() => setStep(0)} >
+          <i className={step >= 3 ? 'material-icons checked' : iconClasses(step, 0)}>info</i>
+          Identificação do Usuário
         </li>
-        <li>
-          <a className={`link ${secondLink}`}>
-            <i className={`material-icons ${secondLink}`}>home</i>
-            Endereço do Usuário
-          </a>
+        <li
+          className={step >= 3 ? 'link checked' : liClasses(step, 1)}
+          onClick={() => setStep(1)}>
+          <i className={step >= 3 ? 'material-icons checked' : iconClasses(step, 1)}>home</i>
+          Endereço do Usuário
         </li>
-        <li>
-          <a className={`link ${thirdLink}`}>
-            <i className={`material-icons ${thirdLink}`}>description</i>
-            Sobre Você
-          </a>
+        <li
+          className={step >= 3 ? 'link checked' : liClasses(step, 2)}
+          onClick={() => setStep(2)}>
+          <i className={step >= 3 ? 'material-icons checked' : iconClasses(step, 2)}>description</i>
+          Sobre Você
         </li>
       </ul>
     </nav>

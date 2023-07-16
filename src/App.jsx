@@ -3,9 +3,9 @@ import FormTemplate from './assets/components/form-component/FormTemplate'
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <FormTemplate />
-    </div>
+    </main>
   )
 }
 

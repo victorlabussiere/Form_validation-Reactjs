@@ -1,46 +1,78 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./formTemplate.css";
+import { useState } from "react";
+import "./formTemplate.style.css";
 
-import FirstStep from "./signInSteps/FirstStep";
-import SecondStep from "./signInSteps/SecondStep";
-import ThirdStep from "./signInSteps/ThirdStep";
-import CheckForm from "./signInSteps/CheckForm";
-import SucessPage from "./signInSteps/SucessPage";
+import Navbar from "../navbar/Navabar";
+import { FirstStep, SecondStep, ThirdStep, CheckForm } from './steps/index.jsx'
+
+import { validateField } from './helpers/validateFields'
+import { FormContext } from "../../../context";
 
 export default function FormTemplate() {
-  let done = "";
-  done = localStorage.done;
+
+  let [data, setData] = useState({})
+
+  let [step, setStep] = useState(0)
+
+  let classControl = [
+    ['', 'hidden', 'hidden', 'hidden'],
+    ['hidden', '', 'hidden', 'hidden'],
+    ['hidden', 'hidden', '', 'hidden'],
+    ['hidden', 'hidden', 'hidden', ''],
+    ['hidden', 'hidden', 'hidden', 'hidden'],
+  ]
 
   return (
-    <div className="formContainer">
-      {done === "" || !done ? (
-        <h1>Cadastrar Usuário</h1>
-      ) : (
-        <h1>Usuário Cadastrado!</h1>
-      )}
-      <section className="start">
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <a
-                  href="/first"
-                  className="pButton"
-                  onClick={() => localStorage.setItem("done", "")}
-                >
-                  Iniciar Cadastro
-                </a>
-              }
-            />
-            <Route path="/first" element={<FirstStep />} />
-            <Route path="/second" element={<SecondStep />} />
-            <Route path="/third" element={<ThirdStep />} />
-            <Route path="/checkForm" element={<CheckForm />} />
-            <Route path="/done" element={<SucessPage />} />
-          </Routes>
-        </BrowserRouter>
-      </section>
-    </div>
+    <section className="formContainer">
+      <h2>Criação de usuário</h2>
+
+      <FormContext.Provider value={{ step, setStep, data, setData }}>
+        <Navbar />
+        <form method="get">
+          <fieldset className={classControl[step][0]}>
+            <FirstStep />
+          </fieldset>
+
+          <fieldset className={classControl[step][1]}>
+            <SecondStep />
+          </fieldset>
+
+          <fieldset className={classControl[step][2]}>
+            <ThirdStep />
+          </fieldset>
+
+          <fieldset className={classControl[step][3]}>
+            <CheckForm />
+          </fieldset>
+        </form>
+      </FormContext.Provider>
+
+      <div className="formContainer_buttonsArea">
+
+
+        {step === 0
+          ? ''
+          : <div role='button' onClick={() => setStep(step = step - 1)} >Voltar</div>}
+        {step === 3
+          ? ''
+          : <div role='button' onClick={() => validateField(() => setStep(step = step + 1))}>Próximo passo</div>}
+
+        {step >= 3 && <input type="submit" value='Enviar' className="pButton" onClick={(e) => {
+          e.preventDefault()
+
+          let form = document.querySelector('form')
+          let formData = form ? new FormData(form) : ''
+
+          let jsonFormData = {}
+          for (let pair of formData) {
+            jsonFormData[pair[0]] = pair[1]
+          }
+
+          console.log('console', jsonFormData)
+
+        }} />}
+      </div>
+    </section>
   );
 }
+
+
