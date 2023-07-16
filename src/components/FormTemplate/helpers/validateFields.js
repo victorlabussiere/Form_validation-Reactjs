@@ -1,9 +1,7 @@
-function validateField(callback) {
+function validateField(step, callback) {
     let fieldsets = document.querySelectorAll('form fieldset')
     let inputs = []
-    fieldsets.forEach(e => e.querySelectorAll('input').forEach(i => {
-        inputs.push(i)
-    }))
+    fieldsets[step].querySelectorAll('input').forEach(e => inputs.push(e))
 
     let count = 0
 
@@ -12,6 +10,7 @@ function validateField(callback) {
         if (!input.value) {
             count++
             input.style = 'border: 2px solid red'
+
             if (count > 0) {
                 input.focus()
                 return
@@ -19,7 +18,7 @@ function validateField(callback) {
         }
     }
 
-    callback()
+    return callback()
 }
 
 export { validateField }

@@ -1,6 +1,6 @@
 import "./navbar.css";
 import { useContext } from "react";
-import { FormContext } from "../../../context";
+import { FormContext } from "../../context";
 
 // import helpers functions
 import { iconClasses, liClasses } from './helpers/navbar'
